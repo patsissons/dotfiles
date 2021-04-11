@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # auto-install oh-my-zsh
-[ ! -f "${HOME}/.oh-my-zsh" ] && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+[ ! -f "${HOME}/.oh-my-zsh/oh-my-zsh.sh" ] && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # .dotfiles to bootstrap
 declare -a BOOTSTRAP_FILES=(
