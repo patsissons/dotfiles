@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # .dotfiles to bootstrap
 declare -a BOOTSTRAP_FILES=(
