@@ -9,10 +9,10 @@ declare -a BOOTSTRAP_FILES=(
   .commonrc
   .gitconfig.local
   .tmux.conf
+  .vimrc
   .zshrc
 )
 
 for file in ${BOOTSTRAP_FILES[@]}; do
-  # echo "[cp] ${file} → ${HOME}/"
   cp -Rv "${file}" "${HOME}/"
 done
