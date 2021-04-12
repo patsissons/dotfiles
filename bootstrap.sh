@@ -16,3 +16,13 @@ declare -a BOOTSTRAP_FILES=(
 for file in ${BOOTSTRAP_FILES[@]}; do
   cp -Rv "${file}" "${HOME}/"
 done
+
+if [ ! -z "${SPIN}" ]; then
+  # spin packages that need to be installed
+  declare -a SPIN_PACKAGES=(
+    # used for git-prompt
+    python
+  )
+
+  sudo apt-get install -y --no-install-recommends ${SPIN_PACKAGES}
+fi
