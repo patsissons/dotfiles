@@ -8,7 +8,7 @@ export ZSH=$HOME/.oh-my-zsh
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-if [ -f "${ZSH}/themes/pato.zsh-theme" ]; then
+if [ -f "${ZSH}/custom/themes/pato.zsh-theme" ]; then
   ZSH_THEME="pato"
 else
   ZSH_THEME="robbyrussell"
@@ -76,6 +76,20 @@ fi
 # Add wisely, as too many plugins slow down shell startup.
 
 [ -f "${ZSH_CUSTOM}/plugins.zsh" ] && source "${ZSH_CUSTOM}/plugins.zsh"
+
+plugins=(
+  # colorize
+  command-not-found
+  # docker
+  # dotenv
+  git
+  # gitignore
+  git-prompt
+  # tmux
+  z
+  # zsh-autosuggestions
+  # zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
