@@ -8,7 +8,7 @@ export ZSH=$HOME/.oh-my-zsh
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-if [ -f "${ZSH}/custom/themes/pato.zsh-theme" ]; then
+if [ -f "${ZSH_CUSTOM}/themes/pato.zsh-theme" ]; then
   ZSH_THEME="pato"
 else
   ZSH_THEME="robbyrussell"

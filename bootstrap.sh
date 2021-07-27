@@ -23,5 +23,5 @@ if [ ! -z "${SPIN}" ]; then
   )
 
   [ ${#SPIN_PACKAGES[@]} -gt 0 ] && \
-    sudo apt-get install -y --no-install-recommends ${SPIN_PACKAGES}
+    sudo apt install -y --no-install-recommends ${SPIN_PACKAGES}
 fi

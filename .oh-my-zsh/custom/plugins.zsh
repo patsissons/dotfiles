@@ -1,6 +1,7 @@
 #!/bin/zsh
 
-# make sure it exists
+# for https://github.com/agkozak/zsh-z
+# make sure the database file exists
 touch "${HOME}/.z"
 
 # we don't need to install these by default
