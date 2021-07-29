@@ -3,6 +3,30 @@
 # [include]
 # path = ~/.gitconfig.local
 
+[user]
+	name = Pat Sissons
+	email = pat.sissons@shopify.com
+
+[rebase]
+	autosquash = true
+
+[diff]
+	algorithm = patience
+	tool = diffmerge
+[merge]
+    tool = diffmerge
+[difftool "diffmerge"]
+	cmd = "/Applications/DiffMerge.app/Contents/MacOS/DiffMerge --nosplash \"$LOCAL\" \"$REMOTE\""
+[mergetool "diffmerge"]
+	cmd = "/Applications/DiffMerge.app/Contents/MacOS/DiffMerge --merge --result=\"$MERGED\" \"$LOCAL\" $(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi) \"$REMOTE\""
+	trustexitcode = true
+[difftool "sourcetree"]
+	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --nosplash \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --nosplash --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+	trustExitCode = true
+
 [alias]
   # detailed history from HEAD
   audit = "log --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%C(yellow)%h %C(blue)%ad %C(red)%an%x09%C(reset)%s %C(green)%d'"
