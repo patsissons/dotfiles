@@ -72,3 +72,5 @@
   squashn = "!f(){ git reset --hard HEAD~${1} && git merge --squash HEAD@{1} && git commit --file .git/SQUASH_MSG; }; f"
   sq = "!git squash"
   sqn = "!git squashn"
+  # dev integration status
+  dis = "!f(){ for repo in $(/opt/dev/bin/dev integration status | tail -n+2 | awk '$2 ~ /^enabled$/ {print $1}' | xargs echo); do echo \"\n-- $repo --\"; git -C $([ -d \"../$repo\" ] && echo \"../$repo\" || echo \"../../$repo\") status --short --branch; done }; f"
