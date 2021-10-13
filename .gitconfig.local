@@ -34,6 +34,8 @@
   messages = "!f() { git log --pretty=format:${1:-'%s'}; }; f"
   # amend HEAD with staged files (append -a to also include unstaged files)
   comma = "commit --amend --no-edit"
+  # fixup the provided hash
+  fix = "commit --fixup"
   # print current branch
   cb = "!f() { git rev-parse --abbrev-ref ${1:-HEAD}; }; f"
   # fetch (origin) and rebase (master)
