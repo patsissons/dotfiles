@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO: look into https://www.chezmoi.io/ to maybe replace this?
+
 # auto-install oh-my-zsh
 [ ! -f "${HOME}/.oh-my-zsh/oh-my-zsh.sh" ] && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
