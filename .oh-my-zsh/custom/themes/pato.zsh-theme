@@ -14,3 +14,7 @@ unset RPROMPT
 # update the default prompt with git_super_status
 PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
 PROMPT+=' %{$fg[cyan]%}%~%{$reset_color%} $(git_super_status)'
+
+if [ ! -z "${SPIN}" ]; then
+  PROMPT="%{$fg_bold[white]%}[SPIN] $PROMPT"
+fi
