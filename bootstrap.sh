@@ -7,6 +7,14 @@ if [ ! -f "${HOME}/.oh-my-zsh/oh-my-zsh.sh" ]; then
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
+if [ -d "${HOME}/.zshrc.d" ]; then
+  # append over the existing config
+  cp -Rv ".zshrc" "${HOME}/.zshrc.d/dotfiles.inc.zsh"
+else
+  # if this replaces an existing config, check $HOME/.zshrc.pre-oh-my-zsh
+  cp -Rv ".zshrc" "${HOME}/.zshrc"
+fi
+
 # .dotfiles to bootstrap
 declare -a BOOTSTRAP_FILES=(
   .oh-my-zsh
@@ -14,7 +22,6 @@ declare -a BOOTSTRAP_FILES=(
   .gitconfig.local
   .tmux.conf
   .vimrc
-  .zshrc
 )
 
 for file in ${BOOTSTRAP_FILES[@]}; do
