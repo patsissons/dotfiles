@@ -20,6 +20,7 @@ declare -a BOOTSTRAP_FILES=(
   .oh-my-zsh
   .commonrc
   .gitconfig.local
+  .ssh
   .tmux.conf
   .vimrc
 )
