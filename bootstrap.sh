@@ -18,16 +18,14 @@ declare -a BOOTSTRAP_FILES=(
   .zshrc.d
 )
 
-for file in ${BOOTSTRAP_FILES[@]}; do
-  cp -Rv "${file}" "${HOME}/"
-done
+rsync -avh ${BOOTSTRAP_FILES} "${HOME}/"
 
 if [ -f /etc/zsh/zshrc.default.inc.zsh ]; then
   # assume that this default file will load our .zshrc.d/* files
-  cp -Rv /etc/zsh/zshrc.default.inc.zsh "${HOME}/.zshrc"
+  rsync -avh /etc/zsh/zshrc.default.inc.zsh "${HOME}/.zshrc"
 else
   # if this replaces an existing config, check $HOME/.zshrc.pre-oh-my-zsh
-  cp -Rv .zshrc "${HOME}/.zshrc"
+  rsync -avh .zshrc "${HOME}/.zshrc"
 fi
 
 if [ ! -z "${SPIN}" ]; then

@@ -1,6 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-export ZSH_CUSTOM="${ZSH}/custom"
+export ZSH="${HOME}/.oh-my-zsh"
 
 # don't edit this file, add customizations to ~/.zshrc.d/
 if [ -d ~/.zshrc.d ]; then
@@ -19,5 +18,5 @@ elif [ -f "${ZSH}/templates/zshrc.zsh-template" ]; then
 else
   # somehow no template either??? fallback on a super basic config
   ZSH_THEME="robbyrussell"
-  source $ZSH/oh-my-zsh.sh
+  source "${ZSH}/oh-my-zsh.sh"
 fi

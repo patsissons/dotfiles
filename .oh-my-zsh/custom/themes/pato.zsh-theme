@@ -11,10 +11,17 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✔%G%}"
 ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
 # don't show the git status on the right
 unset RPROMPT
-# update the default prompt with git_super_status
-PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
-PROMPT+=' %{$fg[cyan]%}%~%{$reset_color%} $(git_super_status)'
 
+PROMPT_PATO_PREFIX='➜'
 if [ ! -z "${SPIN}" ]; then
-  PROMPT="%{$fg_bold[white]%}[SPIN] $PROMPT"
+  PROMPT_PATO_PREFIX="꩜ ${PROMPT_PATO_PREFIX}"
+fi
+
+PROMPT="%(?:%{$fg_bold[green]%}${PROMPT_PATO_PREFIX}:%{$fg_bold[red]%}${PROMPT_PATO_PREFIX})"
+PROMPT+=' %{$fg[cyan]%}%~%{$reset_color%}'
+
+if [ -z "${__GIT_PROMPT_DIR}" ]; then
+  PROMPT+=' '
+else
+  PROMPT+=' $(git_super_status)'
 fi
