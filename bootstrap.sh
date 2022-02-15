@@ -18,7 +18,7 @@ declare -a BOOTSTRAP_FILES=(
   .zshrc.d
 )
 
-rsync -avh ${BOOTSTRAP_FILES} "${HOME}/"
+rsync -avh ${BOOTSTRAP_FILES[@]} "${HOME}/"
 
 if [ -f /etc/zsh/zshrc.default.inc.zsh ]; then
   # assume that this default file will load our .zshrc.d/* files
@@ -36,6 +36,6 @@ if [ ! -z "${SPIN}" ]; then
   )
 
   if [ ${#SPIN_PACKAGES[@]} -gt 0 ]; then
-    sudo apt install -y --no-install-recommends ${SPIN_PACKAGES}
+    sudo apt install -y --no-install-recommends ${SPIN_PACKAGES[@]}
   fi
 fi
