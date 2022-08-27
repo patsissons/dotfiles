@@ -4,6 +4,11 @@
 [ -f "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [ -f "/usr/local/bin/brew" ] && eval "$(/usr/local/bin/brew shellenv)"
 
+# nvm integration
+[ -d "${HOME}/.nvm" ] && export NVM_DIR="${HOME}/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 # local bin
 [ -d "${HOME}/bin" ] && export PATH=${HOME}/bin:$PATH
 
