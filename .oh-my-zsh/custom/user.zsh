@@ -10,6 +10,13 @@
 # common shell configuration
 [ -f "${HOME}/.commonrc" ] && source "${HOME}/.commonrc"
 
+# nvm
+[ -z "${HOME}/.nvm" ] && mkdir -p "${HOME}/.nvm"
+[ -z "${NVM_DIR}" ] && export NVM_DIR="${HOME}/.nvm"
+[ -z "${NVM_HOME}" ] && export NVM_HOME="${HOMEBREW_PREFIX}/opt/nvm"
+[ -s "${NVM_HOME}/nvm.sh" ] && source "${NVM_HOME}/nvm.sh"
+[ -s "${NVM_HOME}/etc/bash_completion.d/nvm" ] && source "${NVM_HOME}/etc/bash_completion.d/nvm"
+
 # pyenv shims
 # setup: pyenv install 2.7.18
 [ -d "${HOME}/.pyenv/shims" ] && export PATH=${HOME}/.pyenv/shims:$PATH
