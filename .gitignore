@@ -1,5 +1,4 @@
 .DS_Store
 
 # these are ignored because they are generated via the template files
-/nix-darwin/flake.nix
-/nix-darwin/home.nix
+/nix-darwin/flake

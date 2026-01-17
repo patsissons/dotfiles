@@ -1,13 +1,19 @@
 #!/bin/bash
 
-read -p "Enter hostname [$(hostname -s)]: " NIX_HOSTNAME
-NIX_HOSTNAME=${NIX_HOSTNAME:-$(hostname -s)}
+echo "Provisioning macOS with nix-darwin..."
 
-scutil --set LocalHostName ${NIX_HOSTNAME} && \
+CURRENT_HOSTNAME=$(scutil --get LocalHostName)
+read -p "Enter hostname [${CURRENT_HOSTNAME}]: " NEW_HOSTNAME
+[ "${NEW_HOSTNAME}" != "${CURRENT_HOSTNAME}" ] && scutil --set LocalHostName ${NEW_HOSTNAME}
+
+echo "Provisioning macOS with nix-darwin..." && \
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
 sh <(curl -L https://nixos.org/nix/install) && \
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager && \
-nix-channel --update && \
+$SHELL -l && \
 nix-shell -p git --run "git clone -b nixos https://github.com/patsissons/dotfiles.git" && \
+nix-shell -p stow --run "cd ~/dotfiles && ./setup.sh" && \
 ~/dotfiles/nix-darwin/template/config.sh && \
-nix --extra-experimental-features "nix-command flakes" run nix-darwin -- switch --flake ~/.config/nix-darwin --impure
+nix --extra-experimental-features "nix-command flakes" run nix-darwin -- switch --flake ~/.config/nix-darwin/flake --impure && \
+echo "Done. Hit enter to reboot." && \
+read && \
+sudo reboot

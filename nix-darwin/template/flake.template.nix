@@ -5,13 +5,9 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs }:
   let
     configuration = { pkgs, ... }: {
       # List packages installed in system profile. To search by name, run:
@@ -19,21 +15,33 @@
       environment.systemPackages =
         [
           # essentials
+          pkgs.asdf-vm
           pkgs.bat
           pkgs.curl
+          pkgs.direnv
           pkgs.fzf
           pkgs.git
           pkgs.htop
           pkgs.jq
           pkgs.ncdu
+          pkgs.ripgrep
+          pkgs.stow
           pkgs.tmux
           pkgs.wget
           pkgs.vim
 
           # non-essentials
-
-          # to try out
-          # pkgs.ripgrep
+          # pkgs._1password
+          # pkgs._1password-gui
+          # pkgs.arc-browser
+          # pkgs.code-cursor
+          # pkgs.iterm2
+          # pkgs.itsycal
+          # pkgs.raycast
+          # pkgs.rectangle
+          # pkgs.signal-desktop
+          # pkgs.vscode
+          # pkgs.warp-terminal
         ];
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
@@ -58,24 +66,58 @@
       # customizations based on https://github.com/omerxx/dotfiles/blob/master/nix-darwin/flake.nix
       security.pam.enableSudoTouchIdAuth = true;
       users.users.machine_username.home = "/Users/machine_username";
-      home-manager.backupFileExtension = "backup";
       nix.configureBuildUsers = true;
       nix.useDaemon = true;
 
+      # see: https://daiderd.com/nix-darwin/manual/index.html and https://mynixos.com/nix-darwin/options
       system.defaults = {
+        CustomSystemPreferences = {
+          # don't seem to work...?
+          # "com.apple.finder" = {
+          #   NewWindowTarget = "PfHm";
+          # };
+          # "com.apple.driver.AppleBluetoothMultitouch.trackpad" = {
+          #   TrackpadPinch = 0;
+          #   TrackpadRotate = 0;
+          #   TrackpadTwoFingerDoubleTapGesture = 0;
+          # };
+        };
+        CustomUserPreferences = {};
+        LaunchServices.LSQuarantine = false;
+        NSGlobalDomain.AppleInterfaceStyle = "Dark";
+        NSGlobalDomain.AppleShowAllExtensions = true;
+        NSGlobalDomain.NSAutomaticPeriodSubstitutionEnabled = false;
+        NSGlobalDomain."com.apple.keyboard.fnState" = true;
+        NSGlobalDomain."com.apple.swipescrolldirection" = false;
         dock.autohide = true;
         dock.mru-spaces = false;
+        dock.persistent-apps = [
+          "/Applications/Arc.app"
+          "/Applications/Signal.app"
+          "/Applications/Slack.app"
+          "/Applications/iTerm.app"
+          "/System/Applications/System Settings.app"
+        ];
+        dock.persistent-others = [
+          "/Users/machine_username/Downloads"
+        ];
+        dock.show-recents = false;
         finder.AppleShowAllExtensions = true;
+        finder.FXDefaultSearchScope = "SCcf";
         finder.FXPreferredViewStyle = "Nlsv";
+        finder.ShowPathbar = true;
         loginwindow.LoginwindowText = "machine_hostname";
+        magicmouse.MouseButtonMode = "TwoButton";
+        trackpad.TrackpadThreeFingerTapGesture = 0;
       };
 
       # Homebrew needs to be installed on its own!
       homebrew.enable = true;
       homebrew.brews = [
-        "asdf"
+        "hashicorp/tap/terraform"
       ];
       homebrew.casks = [
+        "1password"
         "1password-cli"
         "arc"
         "cursor"
@@ -87,8 +129,12 @@
         "rectangle"
         "signal"
         "shottr"
+        "slack"
         "visual-studio-code"
         "warp"
+      ];
+      homebrew.taps = [
+        "hashicorp/tap"
       ];
     };
   in
@@ -99,11 +145,6 @@
       system = "aarch64-darwin";
       modules = [
         configuration
-        home-manager.darwinModules.home-manager {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.machine_username = import ./home.nix;
-        }
       ];
     };
 
