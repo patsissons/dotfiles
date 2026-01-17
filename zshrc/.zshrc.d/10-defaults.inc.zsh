@@ -1,7 +1,11 @@
 #!/bin/zsh
 
 # nix shell
-[ -f "${HOME}/.nix-profile/etc/profile.d/nix.sh" ] && . "${HOME}/.nix-profile/etc/profile.d/nix.sh"
+if [ -f "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then
+  . "${HOME}/.nix-profile/etc/profile.d/nix.sh"
+elif [ -f "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
+  . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+fi
 
 # nix paths
 [ -d /run/current-system/sw/bin ] && export PATH="/run/current-system/sw/bin:${PATH}"
@@ -18,10 +22,15 @@ touch "${HOME}/.gitconfig"
 [ -f "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # asdf
+
 if [ -f "${HOME}/.nix-profile/share/asdf-vm/asdf.sh" ]; then
   source "${HOME}/.nix-profile/share/asdf-vm/asdf.sh"
   # append completions to fpath
   fpath=(${ASDF_DIR}/completions $fpath)
+elif [ -d "${ASDF_DATA_DIR:-$HOME/.asdf}/shims" ]; then
+  export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+  # append completions to fpath
+  fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 fi
 
 # zsh-z
