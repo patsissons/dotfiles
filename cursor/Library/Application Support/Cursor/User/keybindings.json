@@ -1,0 +1,67 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+  {
+    "key": "shift+delete",
+    "command": "editor.action.deleteLines",
+    "when": "textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+cmd+k",
+    "command": "-editor.action.deleteLines",
+    "when": "textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+shift+down",
+    "command": "workbench.action.terminal.focusNext"
+  },
+  {
+    "key": "ctrl+shift+up",
+    "command": "workbench.action.terminal.focusPrevious"
+  },
+  {
+    "key": "cmd+r cmd+t",
+    "command": "workbench.action.tasks.test"
+  },
+  {
+    "key": "cmd+r shift+t",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Test current branch"
+  },
+  {
+    "key": "cmd+r cmd+s",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Style check current file"
+  },
+  {
+    "key": "cmd+r shift+s",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Style check current branch"
+  },
+  {
+    "key": "cmd+k",
+    "command": "-cursorai.action.generateInTerminal",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "shift+cmd+l",
+    "command": "-aichat.insertselectionintochat"
+  },
+  {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
+  },
+  {
+    "key": "shift+cmd+k",
+    "command": "cursorai.action.generateInTerminal",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported || terminalHasBeenCreated && terminalPromptBarVisible || terminalProcessSupported && terminalPromptBarVisible"
+  },
+  {
+    "key": "cmd+k",
+    "command": "-cursorai.action.generateInTerminal",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported || terminalHasBeenCreated && terminalPromptBarVisible || terminalProcessSupported && terminalPromptBarVisible"
+  },
+  {
+    "key": "shift+alt+cmd+b",
+    "command": "gitlens.toggleFileBlame"
+  }
+]

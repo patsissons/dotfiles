@@ -1,0 +1,119 @@
+{
+  "breadcrumbs.enabled": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.insertSpaces": true,
+  "editor.rulers": [80],
+  "editor.tabSize": 2,
+  "emmet.showExpandedAbbreviation": "never",
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "files.defaultLanguage": "markdown",
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "git.autofetch": true,
+  "gitlens.advanced.messages": {
+    "suppressCommitNotFoundWarning": true
+  },
+  "gitlens.views.branches.branches.layout": "list",
+  "jest.autoRun": "off",
+  "terminal.external.osxExec": "Ghostty.app",
+  "window.autoDetectColorScheme": true,
+  "window.newWindowDimensions": "maximized",
+  "workbench.startupEditor": "none",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.renderWhitespace": "all",
+  "editor.inlineSuggest.enabled": true,
+  "remote.SSH.defaultExtensions": [
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "mhutchie.git-graph",
+    "orta.vscode-jest"
+  ],
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "scminput": false,
+    "yaml": true
+  },
+  "[solidity]": {
+    "editor.defaultFormatter": "JuanBlanco.solidity"
+  },
+  "vsicons.dontShowNewVersionMessage": true,
+  "svelte.enable-ts-plugin": true,
+  "redhat.telemetry.enabled": false,
+  "files.associations": {
+    "*.css": "css",
+    "justfile": "shellscript",
+    "*.just": "shellscript"
+  },
+  "workbench.iconTheme": "vscode-icons",
+  "[xml]": {
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
+  },
+  "quokka.automaticRestart": true,
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "prisma.showPrismaDataPlatformNotification": false,
+  "github.copilot.editor.enableAutoCompletions": true,
+  "editor.unicodeHighlight.nonBasicASCII": false,
+  "cursor.cpp.disabledLanguages": [
+    "scminput"
+  ],
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+  "[shellscript]": {
+    "files.eol": "\n"
+  },
+  "eslint.codeActionsOnSave.rules": null,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "gitlens.views.scm.grouped.views": {
+    "commits": true,
+    "branches": true,
+    "remotes": true,
+    "stashes": true,
+    "tags": true,
+    "worktrees": true,
+    "contributors": true,
+    "repositories": true,
+    "searchAndCompare": false,
+    "launchpad": false
+  },
+  "quokka.compactMessageOutput": false,
+  "[elixir]": {
+    "editor.defaultFormatter": "elixir-lsp.elixir-ls"
+  },
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform"
+  },
+  "[typescriptreact]": {},
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "editor.fontFamily": "JetBrainsMonoNL Nerd Font Mono, Menlo, Monaco, 'Courier New', monospace",
+  "terminal.integrated.fontSize": 14,
+  "workbench.settings.applyToAllProfiles": [
+
+  ],
+  "window.commandCenter": true
+}
