@@ -1,0 +1,10 @@
+--target=~/.config
+--ignore=.gitignore
+--ignore=.old
+--ignore=.stowrc
+--ignore=DS_Store
+--ignore=nix-darwin
+--ignore=nix-install.sh
+--ignore=nix-update.sh
+--ignore=README.md
+--ignore=setup.sh
