@@ -1,4 +1,2 @@
-.DS_Store
-
-# these are ignored because they are generated via the template files
-/nix-darwin/flake
+.ignore
+/macos/.config/macos/.provisioned

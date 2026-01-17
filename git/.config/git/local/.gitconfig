@@ -1,11 +1,12 @@
 # add the following to your ~/.gitconfig
 #
 # [include]
-# path = ~/.config/git/.gitconfig
+# path = ~/.config/git/local/.gitconfig
 
-[user]
-  name = Pat Sissons
-  email = patricksissons@gmail.com
+# no default user in this file, this should be manually copied to ~/.gitconfig
+# [user]
+#   name = Pat Sissons
+#   email = patricksissons@gmail.com
 
 [rebase]
   autosquash = true
