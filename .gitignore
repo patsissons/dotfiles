@@ -1,2 +1,17 @@
+.DS_Store
 .ignore
+
 /macos/.config/macos/.provisioned
+
+/cursor/.cursor/*
+!/cursor/.cursor/extensions.txt
+!/cursor/.cursor/mcp.json
+/cursor/Library/*
+!/cursor/Library/Application Support
+/cursor/Library/Application Support/*
+!/cursor/Library/Application Support/Cursor
+/cursor/Library/Application Support/Cursor/*
+!/cursor/Library/Application Support/Cursor/User
+/cursor/Library/Application Support/Cursor/User/*
+!/cursor/Library/Application Support/Cursor/User/keybindings.json
+!/cursor/Library/Application Support/Cursor/User/settings.json

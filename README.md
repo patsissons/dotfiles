@@ -1,90 +1,74 @@
-# dotfiles provisioning
+# dotfiles
 
-Provision a new machine using the steps below based on the provisioning style.
+We can both bootstrap an existing system with these dotfiles, as well as provision a brand new system. Provisioning a brand new system will bootstrap the system once provisioned.
 
-## basic mac provisioning
+## Boostrapping
 
-pick something for `machine_hostname`
+Bootstrapping assumes the system is already provisioned and has the appropriate tools needed to perform the bootstrap. These steps can be run on any system, they are no OS-specific. These steps are also idempotent, they can be run many times and always produce the same outcome.
+
+### 1-liner bootstrapping script
+
+When using the 1-liner script, all further steps below can be ignored.
 
 ```sh
-scutil --set LocalHostName machine_hostname
+/bin/bash -c "$(curl -fsSL http://bootstrap.dotfiles.pjs.to)"
 ```
 
-## 1-shot install script
-
-_NOTE that you'll need to reboot at least once from a fresh laptop before running this script, or you'll run into a nix issue with FileVault._
+or
 
 ```sh
-/bin/bash -c "$(curl -fsSL http://dotfiles.pjs.to)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/patsissons/dotfiles/refs/heads/simple/bootstrap.sh)"
 ```
 
-This script should fully provision a new machine, the remaining steps below can be skipped when using the script.
+## Provisioning
 
-## Install homebrew
+Provisioning assumes the system has been fully reset and is completely untouched. These steps should not necessarily be run more than once, though many will not cause any issues running more than once.
+
+### Setup the hostname
+
+pick something reasonable for `machine_name` and `machine_hostname`
 
 ```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+scutil --set LocalHostName machine_name
+scutil --set HostName machine_name.machine_hostname
 ```
 
-## Install nix
+### 1-liner provisioning script
+
+When using the 1-liner script, all further steps below can be ignored.
 
 ```sh
-sh <(curl -L https://nixos.org/nix/install) && \
-$SHELL -l
+/bin/bash -c "$(curl -fsSL http://provision.dotfiles.pjs.to)"
 ```
 
-## Clone dotfiles
+or
 
 ```sh
-nix-shell -p git --run "git clone -b nixos https://github.com/patsissons/dotfiles.git \"${HOME}/.dotfiles\""
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/patsissons/dotfiles/refs/heads/simple/provision.sh)"
 ```
 
-## Install nix essential packages
+## Helpers
+
+### Homebrew
 
 ```sh
-nix-env --install --file "${HOME}/.dotfiles/nix/.config/nix/pkgs/essential.nix" && \
-$SHELL -l
-```
-
-## Stow dotfiles
-
-```sh
-stow -v --dir "${HOME}/.dotfiles" --target --target "${HOME} \
-  --stow git \
-  --stow nix \
-  --stow tmux \
-  --stow vim \
-  --stow zshrc
-```
-
-## macos specific
-
-### Stow dotfiles
-
-```sh
-stow -v --dir "${HOME}/.dotfiles" --target "${HOME}" --stow macos
-```
-
-### Bootstrap apps
-
-```sh
-~/.config/macos/bootstrap.sh
-```
-
-_NOTE: this script will be somewhat interactive, at the very least to request sudo access for installations._
-
-## Homebrew setup
-
-If managing homebrew manually, these commands help migrate to a new machine.
-
-### save installed packages
-
-```sh
+# save installed packages
 brew leaves > leaves.txt
 ```
 
-### restore installed packages
+```sh
+# restore installed packages
+xargs brew install < leaves.txt
+```
+
+### Cursor
 
 ```sh
-xargs brew install < leaves.txt
+# save extensions list
+cursor --list-extensions > "${HOME}/.dotfiles/cursor/.cursor/extensions.txt"
+```
+
+```sh
+# restore extensions from a list
+while read extension_id; do cursor --install-extension "$extension_id"; done < "${HOME}/.dotfiles/cursor/.cursor/extensions.txt"
 ```
