@@ -1,14 +1,6 @@
 # dotfiles provisioning
 
-Provision a new machine using the steps below based on the provisioning style. A nix script is available at `nix-install.sh` to one-shot the provisioning process.
-
-## 1-shot install script
-
-_NOTE that you'll need to reboot at least once from a fresh laptop before running this script, or you'll run into a nix issue with FileVault._
-
-```sh
-/bin/bash -c "$(curl -fsSL http://nix.pjs.to)"
-```
+Provision a new machine using the steps below based on the provisioning style.
 
 ## basic mac provisioning
 
@@ -18,84 +10,68 @@ pick something for `machine_hostname`
 scutil --set LocalHostName machine_hostname
 ```
 
-## nix-darwin
+## 1-shot install script
 
-### Install homebrew
+_NOTE that you'll need to reboot at least once from a fresh laptop before running this script, or you'll run into a nix issue with FileVault._
+
+```sh
+/bin/bash -c "$(curl -fsSL http://dotfiles.pjs.to)"
+```
+
+This script should fully provision a new machine, the remaining steps below can be skipped when using the script.
+
+## Install homebrew
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-### Install nixos
+## Install nix
 
 ```sh
-sh <(curl -L https://nixos.org/nix/install)
+sh <(curl -L https://nixos.org/nix/install) && \
+$SHELL -l
 ```
 
-_NOTE that you'll need to start a new shell or run `$SHELL -l` to activate nix in the shell._
-
-### Clone dotfiles
+## Clone dotfiles
 
 ```sh
-nix-shell -p git --run "git clone -b nixos https://github.com/patsissons/dotfiles.git"
+nix-shell -p git --run "git clone -b nixos https://github.com/patsissons/dotfiles.git \"${HOME}/.dotfiles\""
 ```
+
+## Install nix essential packages
+
+```sh
+nix-env --install --file "${HOME}/.dotfiles/nix/.config/nix/pkgs/essential.nix" && \
+$SHELL -l
+```
+
+## Stow dotfiles
+
+```sh
+stow -v --dir "${HOME}/.dotfiles" --target --target "${HOME} \
+  --stow git \
+  --stow nix \
+  --stow tmux \
+  --stow vim \
+  --stow zshrc
+```
+
+## macos specific
 
 ### Stow dotfiles
 
 ```sh
-nix-shell -p stow --run "cd ~/dotfiles && ./setup.sh"
+stow -v --dir "${HOME}/.dotfiles" --target "${HOME}" --stow macos
 ```
 
-_NOTE that we are creating `.config/nix-darwin` manually because the nixos installation will refuse to build the flake against a symlink._
-
-### Configure nix-darwin files
-
-The config files are templated currently so we need to replace `machine_hostname` and `machine_username` with approriate values.
+### Bootstrap apps
 
 ```sh
-~/dotfiles/nix-darwin/template/config.sh
+~/.config/macos/bootstrap.sh
 ```
 
-### Install the flake
-
-```sh
-# impure because of ~ expansion
-nix --extra-experimental-features "nix-command flakes" run nix-darwin -- switch --flake ~/.config/nix-darwin/flake --impure
-```
-
-### Applying changes to the flake
-
-Run these commands if any changes are made to the flake templates.
-
-```sh
-~/dotfiles/nix-update.sh
-```
-
-### Setup fresh nix-darwin
-
-This is only necessary if creating a new flake for the first time, this is only preserved here for reference purposes and should not really be necessary.
-
-Note that we are provisioning this flake for apple silicon, remove the `-e "s/x86_64-darwin/aarch64-darwin/"` if provisioning for intel silicon.
-
-#### Provision the flake file
-
-```sh
-mkdir -p ~/.config/nix-darwin
-cd ~/.config/nix-darwin
-nix --extra-experimental-features "nix-command flakes" flake init -t nix-darwin
-sed -i '' -e "s/simple/$(scutil --get LocalHostName)/" -e "s/x86_64-darwin/aarch64-darwin/" -e "s/Example Darwin system flake/Default nix-darwin system/" flake.nix
-```
-
-## stow provisioning
-
-stow provisioning is only necessary when not using nix-darwin (e.g., on an ephemeral remote system). We will otherwise stow the dotfiles as part of the nix-darwin provisioning process.
-
-```sh
-cd ~/dotfiles
-./setup.sh
-```
-
-_NOTE that if `stow` is not available then nothing will be stowed._
+_NOTE: this script will be somewhat interactive, at the very least to request sudo access for installations._
 
 ## Homebrew setup
 

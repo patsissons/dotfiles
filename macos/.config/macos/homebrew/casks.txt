@@ -1,0 +1,15 @@
+1password
+1password-cli
+arc
+cursor
+iterm2
+itsycal
+kap
+orbstack
+raycast
+rectangle
+signal
+shottr
+slack
+visual-studio-code
+warp
