@@ -27,6 +27,13 @@ stow -v --dir "${DOTFILES_DIR}" --target "${TARGET_DIR}" \
   --stow cursor \
   --stow macos
 
+if [ -n "${PROVISION_HOSTNAME}" ]; then
+  echo Setting hostname… && \
+  PROVISION_LOCAL_HOSTNAME="${PROVISION_HOSTNAME%%.*}" && \
+  echo scutil --set LocalHostName "${PROVISION_LOCAL_HOSTNAME}" && \
+  echo scutil --set HostName "${PROVISION_HOSTNAME}"
+fi
+
 # Setup some handy keybindings
 echo Installing default key bindings… && \
 mkdir -p "${HOME}/Library/KeyBindings" && \
@@ -35,12 +42,15 @@ ln -s "${MACOS_CONFIG_DIR}/DefaultKeyBinding.dict" "${HOME}/Library/KeyBindings/
 echo Initializing Touch ID for sudo… && \
 sed -e 's/^#auth/auth/' /etc/pam.d/sudo_local.template | sudo tee /etc/pam.d/sudo_local
 
+echo Forcing nfs v4… && \
+echo "nfs.client.mount.options = vers=4" | sudo tee -a /etc/nfs.conf
+
 # Set login window text
 # sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText -string "$(hostname -s)"
 
 # some packages come with macos already: jq, vim, zsh
 echo Installing Homebrew tools… && \
-NONINTERACTIVE=1 brew install asdf bat btop fzf gpg htop ncdu ripgrep starship tmux tree wget zoxide zsh-autosuggestions
+NONINTERACTIVE=1 brew install asdf bat btop dua-cli dust fzf gpg htop just mise ncdu ripgrep starship tmux tree uv wget zoxide zsh-autosuggestions
 # brew tap hashicorp/tap
 # brew install hashicorp/tap/terraform
 

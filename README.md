@@ -26,28 +26,29 @@ Provisioning assumes the system has been fully reset and is completely untouched
 
 ### Setup the hostname
 
-pick something reasonable for `machine_name` and `machine_hostname`
-
-```sh
-scutil --set LocalHostName machine_name
-scutil --set HostName machine_name.machine_hostname
-```
-
 ### 1-liner provisioning script
 
 When using the 1-liner script, all further steps below can be ignored.
 
 ```sh
-/bin/bash -c "$(curl -fsSL http://provision.dotfiles.pjs.to)"
+PROVISION_HOSTNAME=machine_name.machine_hostname /bin/bash -c "$(curl -fsSL http://provision.dotfiles.pjs.to)"
 ```
 
 or
 
 ```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/patsissons/dotfiles/refs/heads/main/provision.sh)"
+PROVISION_HOSTNAME=machine_name.machine_hostname /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/patsissons/dotfiles/refs/heads/main/provision.sh)"
 ```
 
 ## Helpers
+
+### Git
+
+```sh
+# unshallow the dotfiles repo
+git fetch --unshallow && \
+git remote set-branches origin '*'
+```
 
 ### Homebrew
 
