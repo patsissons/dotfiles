@@ -48,6 +48,8 @@ open -a Raycast
 open -a Rectangle
 open -a Shottr
 open -a Signal
+open -a Cursor
+open -a Kap
 ```
 
 ### Itsycal
@@ -55,6 +57,8 @@ open -a Signal
 1. `Allow Full Access`
 
 ### Ghostty
+
+_NOTE_ sometimes ghostty will not open after install, you can run `xattr -d com.apple.quarantine /Applications/Ghostty.app` to fix this
 
 1. `Ignore` the configuration error
 2. `Check for Updates…`
@@ -83,6 +87,32 @@ open -a Signal
 4. Enable `Sync Sidebar`
 5. `Close` for the recovery card
 6. `Make Arc your default` → `Use "Arc"`
+7. `General` tab
+    1. _enable_ `Automatically update my Arc`
+8. Extensions
+    1. `1Password Beta`
+    2. `Designer Tools`
+    3. `GraphQL Network Inspector`
+    4. `React Developer Tools`
+    5. `uBlock Origin` ([URL](https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm))
+9. `Profiles`
+    1. `Archive tabs after`: `30 days`
+    2. create `Empty` and assign to `Anon` space
+    3. create `Bison` and assign to `Bison` space
+10. `Max`
+    1. _enable_ `Tidy Tabs`
+    2. _enable_ `5-Second Previews`
+11. `Advanced`
+    1. _enable_ `Show full URL when Toolbar is enabled`
+    2. _disable_ `Enable Shared Quotes when highlighting text`
+    3. _disable_ `Enable Picture in Picture when you leave a video tab`
+    4. _disable_ `Allow websites to get your theme data`
+    5. _disable_ `Enable Boosts on websites you visit`
+12. `https://accounts.google.com/` → `Sign in` using 1Password for credentials
+13. Switch to `Bison` profile
+    1. Add `1Password Beta` extension
+    3. `https://accounts.google.com/` → `Sign in` using 1Password for credentials
+
 
 ### OrbStack
 
@@ -104,16 +134,33 @@ open -a Signal
 
 ### Rectangle
 
-- `Disable in macOS` for conflict (then `OK`)
+1. `Disable in macOS` for conflict (then `OK`)
+2. Open settings
+3. `General` tab
+4. `Import` button → import the [RectangleConfig.json](/rectangle/.config/rectangle/RectangleConfig.json) file (`~/.config/rectangle/RectangleConfig.json`)
 
 ### Signal
 
-- Scan code
+1. Scan code from mobile app
 
 ### shottr
 
-1. `Run at Startup`
-2. `Setup Hotkeys`
+Shottr unfortunately does not support saving and restoring the settings, so we need to set them up manually.
+
+1. `mkdir -p "${HOME}/Pictures/screenshots"`
+2. `Run at Startup`
+3. `Setup Hotkeys`
+    1. `Fullscreen screenshot`: `cmd+option+6`
+    2. `Area screenshot`: `cmd+option+5`
+    3. `Repeat area screenshot`: `cmd+option+shift+5`
+    4. `Any window screenshot`: `cmd+option+4`
+4. `General` tab
+    1. `Screenshots folder`: `~/Pictures/screenshots`
+    2. `Save format`: `PNG`
+    3. `After Area Crop, show`: `Thumbnail`
+    4. `Hide preview thumbnail`: `Manually (close button)`
+5. `Advanced` tab
+    1. `Diagnostics information`: _disable_ `Allow collection`
 
 ### SSH
 
@@ -121,6 +168,40 @@ open -a Signal
 mkdir -p "${HOME}/.ssh" && \
 op read "op://Private/vs5xeriwbzwale436zyhsy657u/private key" > "${HOME}/.ssh/id_ed25519"
 ```
+
+### Finder
+
+1. Connect to NFS server (`cmd+k`)
+2. `nfs://nas/mnt/volume1`
+3. `Connect`
+4. Connect to SMB server (`Network` tab)
+5. Open `Network/truenas`
+6. `Connect`
+7. _credentials in 1Password_
+
+### System Settings
+
+#### About
+
+1. `Name`: _computer-name_
+
+#### Keyboard
+
+1. `Text Replacements…`
+2. _delete_ `omw`
+3. Add `...` → `…`
+
+#### Lcck Screen
+
+1. `Turn display off on battery when inactive`: `10 minutes`
+2. `Turn display off on power adapter when inactive`: `30 minutes`
+
+#### Privacy & Security
+
+1. `Full Disk Access` → `+` → `Cursor`
+2. `Full Disk Access` → `+` → `Ghostty`
+3. `Developer Tools` → `+` → `Cursor`
+4. `Developer Tools` → `+` → `Ghostty`
 
 ## MacOS defaults
 
@@ -172,7 +253,10 @@ op read "op://Private/vs5xeriwbzwale436zyhsy657u/private key" > "${HOME}/.ssh/id
 
 ## Notes
 
-- add to `/etc/nfs.conf`: `nfs.client.mount.options = vers=4`
-- add Ghostty to `Settings` → `Privacy & Security` → `Full Disk Access` & `Developer Tools`
-- Restore Arc extensions
-- Initial app opening still not quite working right
+- Rectangle doesn't seem to stick the startup at login setting, I had to manually add it in `System Settings` → `General` → `Login Items`
+
+### Other apps to consider
+
+- `balenaEtcher` for flashing USB drives
+- `ChatGPT`
+- `VLC`

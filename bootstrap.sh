@@ -10,7 +10,6 @@ fi
 
 echo Stowing dotfiles… && \
 stow -v --dir "${DOTFILES_DIR}" --target "${TARGET_DIR}" \
-  --stow ghostty \
   --stow git \
   --stow starship \
   --stow tmux \

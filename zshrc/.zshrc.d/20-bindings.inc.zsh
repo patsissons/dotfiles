@@ -15,6 +15,14 @@ bindkey "^[[1;3A" beginning-of-line
 bindkey "^[[1;3B" end-of-line
 # option delete (backspace)
 bindkey "^[^?" backward-kill-word
+# cmd left arrow
+bindkey "^A" beginning-of-line
+# cmd right arrow
+bindkey "^E" end-of-line
+# fn left arrow
+bindkey "^[[H" beginning-of-line
+# fn right arrow
+bindkey "^[[F" end-of-line
 
 # remove slash from delimiters so we can skip around path elements
 WORDCHARS=${WORDCHARS/\/}
