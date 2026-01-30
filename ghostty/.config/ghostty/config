@@ -9,6 +9,7 @@ macos-option-as-alt = true
 
 # grab latest version (until 1.3.0 is released)
 auto-update-channel = tip
+# don't auto update while we're on the tip
+auto-update = off
 # see: https://github.com/ghostty-org/ghostty/pull/9117
 keybind = super+u=toggle_background_opacity
-
