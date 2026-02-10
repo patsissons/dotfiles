@@ -11,6 +11,10 @@ if [ -n "$(command -v zoxide)" ]; then
 fi
 
 # Setup zsh-autosuggestions
-if [ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+if [ -n "$(command -v brew)" -a -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
     source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+
+if [ -f "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+    source "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
