@@ -6,6 +6,10 @@ TARGET_DIR="${HOME}"
 if [ ! -d "${DOTFILES_DIR}" ]; then
   echo Cloning dotfiles… && \
   git clone -b main --depth 1 https://github.com/patsissons/dotfiles.git "${DOTFILES_DIR}"
+else
+  echo Updating dotfiles… && \
+  git -C "${DOTFILES_DIR}" pull || \
+  echo "⚠️ Failed to update dotfiles"
 fi
 
 echo Stowing dotfiles… && \
