@@ -12,6 +12,3 @@ alias scpr="cpr --rsh=ssh"
 alias sshtmp="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 
 # conditional aliases
-if [ -n "$(command -v cursor)" ]; then
-  alias code="cursor"
-fi
