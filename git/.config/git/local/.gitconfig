@@ -16,8 +16,12 @@
   tool = diffmerge
 
 [alias]
+  # check for signed commits
+  signed = "log --format='%h %G? %s'"
+  # force the 1password unlock prompt by signing a dangling commit
+  unlock = "!git commit-tree -S HEAD: </dev/null >/dev/null && echo '1Password is unlocked: git commit signing will now succeed without a Touch ID prompt' || echo '1Password unlock was cancelled or failed: git commit signing will still prompt or fail' >&2"
   # detailed history from HEAD
-  audit = "log --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%C(yellow)%h %C(blue)%ad %C(red)%an%x09%C(reset)%s %C(green)%d'"
+  audit = "log --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%C(yellow)%h %C(magenta)%G? %C(blue)%ad %C(red)%an%x09%C(reset)%s %C(green)%d'"
   # recent commit messages from HEAD
   messages = "!f() { git log --pretty=format:${1:-'%s'}; }; f"
   # amend HEAD with staged files (append -a to also include unstaged files)
