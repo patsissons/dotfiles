@@ -1,5 +1,7 @@
 [include]
   path = ~/.config/git/local/.gitconfig
+  path = /Users/pat.sissons/.config/dev/gitconfig
+  path = /Users/pat.sissons/.config/dev/gitconfig.signing
 
 [core]
   # editor = code -w
@@ -8,8 +10,8 @@
 
 [user]
   name = Pat Sissons
-  email = patricksissons@gmail.com
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHmyZRcVdeo/ctNuqNCp/zsqDfktGnIRNIeZEIGSltSK
+  email = pat.sissons@shopify.com
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMW+ERC21SSLcVWvygAIFouqbPoy28WuuMlDtbZ0yr58
 
 [gpg]
   format = ssh
@@ -20,3 +22,14 @@
 
 [commit]
   gpgsign = true
+[http]
+	maxRequests = 1
+[shop-world "stale-pr-cutoff"]
+	main = 1790983887
+[maintenance]
+	repo = /Users/pat.sissons/world/git
+[credential "https://*.quick.shopify.io"]
+	helper = 
+	helper = /Users/pat.sissons/.config/quick/quick-git-credential.sh
+[http "https://*.quick.shopify.io/"]
+	extraHeader = X-Requested-With: XMLHttpRequest
