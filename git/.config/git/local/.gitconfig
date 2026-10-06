@@ -11,10 +11,6 @@
 [rebase]
   autosquash = true
 
-[diff]
-  algorithm = patience
-  tool = diffmerge
-
 [alias]
   # check for signed commits
   signed = "log --format='%h %G? %s'"
