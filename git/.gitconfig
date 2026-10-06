@@ -1,6 +1,11 @@
 [include]
   path = ~/.config/git/local/.gitconfig
 
+[core]
+  # editor = code -w
+  editor = vim
+	fsmonitor = false
+
 [user]
   name = Pat Sissons
   email = patricksissons@gmail.com
