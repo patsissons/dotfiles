@@ -1,6 +1,7 @@
 theme = Ghostty Default Style Dark
 background = #000
 #background-opacity = 0.68
+background-opacity = 1
 font-family = JetBrainsMonoNL Nerd Font Mono
 font-size = 16
 #background-blur-radius = 20
