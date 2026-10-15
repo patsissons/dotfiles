@@ -73,3 +73,17 @@ cursor --list-extensions > "${HOME}/.dotfiles/cursor/.cursor/extensions.txt"
 # restore extensions from a list
 while read extension_id; do cursor --install-extension "$extension_id"; done < "${HOME}/.cursor/extensions.txt"
 ```
+
+### Claude
+
+```sh
+# copy stowed templates into place (won't overwrite existing files)
+cp -n ~/.claude/settings.template.json ~/.claude/settings.json
+cp -n ~/.claude/statusline.template.py ~/.claude/statusline.py
+```
+
+```sh
+# save local changes back to the templates
+cp ~/.claude/settings.json ~/.dotfiles/claude/.claude/settings.template.json
+cp ~/.claude/statusline.py ~/.dotfiles/claude/.claude/statusline.template.py
+```

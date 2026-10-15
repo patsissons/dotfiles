@@ -15,3 +15,6 @@
 /cursor/Library/Application Support/Cursor/User/*
 !/cursor/Library/Application Support/Cursor/User/keybindings.json
 !/cursor/Library/Application Support/Cursor/User/settings.json
+
+/claude/.claude/*
+!/claude/.claude/*.template.*

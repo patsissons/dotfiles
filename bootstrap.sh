@@ -19,3 +19,8 @@ stow -v --dir "${DOTFILES_DIR}" --target "${TARGET_DIR}" \
   --stow tmux \
   --stow vim \
   --stow zshrc
+
+# no-folding keeps ~/.claude a real dir so runtime state never lands in the repo
+echo Stowing claude templates… && \
+stow -v --no-folding --dir "${DOTFILES_DIR}" --target "${TARGET_DIR}" \
+  --stow claude
